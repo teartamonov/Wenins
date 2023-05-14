@@ -44,17 +44,21 @@ class Main extends JFrame {
         game.add(game_menu);
 
         JPanel gameMenu = new JPanel();
-        gameMenu.setBounds(760, 0, 400, 1080);
+        gameMenu.setBounds(0, 0, 1920, 1080);
         gameMenu.setLayout(null);
         add(gameMenu);
 
         JButton continue_game = new JButton("Продолжить игру");
-        continue_game.setBounds(0, 400, 400, 100);
+        continue_game.setBounds(760, 400, 400, 100);
         gameMenu.add(continue_game);
 
         JButton leave_game = new JButton("Покинуть игру");
-        leave_game.setBounds(0, 520, 400, 100);
+        leave_game.setBounds(760, 520, 400, 100);
         gameMenu.add(leave_game);
+
+        JLabel pauseLabel = new JLabel(new ImageIcon("miku_pic/pause.jpg"));
+        pauseLabel.setBounds(0, 0, 1920, 1080);
+        gameMenu.add(pauseLabel);
 
         start_game.addActionListener(new ActionListener(){
             @Override
@@ -79,12 +83,21 @@ class Main extends JFrame {
         });
 
         game_menu.addActionListener(new ActionListener(){
-
             @Override
             public void actionPerformed(ActionEvent a){
                 game_menu.setVisible(false);
+                game.setVisible(false);
                 gameMenu.setVisible(true);
                 }
+        });
+
+        continue_game.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent a){
+                game_menu.setVisible(true);
+                game.setVisible(true);
+                gameMenu.setVisible(false);
+            }
         });
 
 
