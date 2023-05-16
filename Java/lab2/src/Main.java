@@ -7,36 +7,38 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-class Main extends JFrame {
-    Main() {
+public class Main extends JFrame {
+    private JLabel textLabel;
+    public Main() {
         super("Hatsune Miku: Yandere Love");
         setSize(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
         setDefaultCloseOperation(3);
         setLayout(null);
 
         JPanel game = new JPanel();
-        game.setBounds(0, 0, 1920, 1080);
+        game.setBounds(0, 0, getWidth(), getHeight());
         game.setLayout(null);
         add(game);
 
         JPanel mainMenu = new JPanel();
-        mainMenu.setBounds(0, 0, 1920, 1080);
+        mainMenu.setBounds(0, 0, getWidth(), getHeight());
         mainMenu.setLayout(null);
         add(mainMenu);
 
         JButton start_game = new JButton("Начать игру");
-        start_game.setBounds(1400, 400, 400, 100);
+        start_game.setBounds(getWidth() - 520, getHeight() - 680, 400, 100);
         mainMenu.add(start_game);
 
         JButton close_game = new JButton("Покинуть игру");
-        close_game.setBounds(1400, 520, 400, 100);
+        close_game.setBounds(getWidth() - 520, getHeight() - 560, 400, 100);
         mainMenu.add(close_game);
 
         JLabel startLabel = new JLabel(new ImageIcon("miku_pic/start.jpeg"));
-        startLabel.setBounds(0, 0, 1920, 1080);
+        startLabel.setBounds(0, 0, getWidth(), getHeight());
         mainMenu.add(startLabel);
 
         JButton game_menu = new JButton("Главное меню");
@@ -48,17 +50,29 @@ class Main extends JFrame {
         gameMenu.setLayout(null);
         add(gameMenu);
 
+        JLabel pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
+        JLabel label = new JLabel("Текст на картинке");
+        pic.setBounds(500, 500, 750, 275);
+        label.setBounds(500, 500, 750, 275);
+        label.setFont(new Font("Arial", Font.BOLD, 24));
+        label.setForeground(Color.WHITE);
+
+        gameMenu.add(label);
+        gameMenu.add(pic);
+
         JButton continue_game = new JButton("Продолжить игру");
-        continue_game.setBounds(760, 400, 400, 100);
+        continue_game.setBounds(getWidth() - 1160, getHeight() - 680, 400, 100);
         gameMenu.add(continue_game);
 
         JButton leave_game = new JButton("Покинуть игру");
-        leave_game.setBounds(760, 520, 400, 100);
+        leave_game.setBounds(getWidth() - 1160, getHeight() - 560, 400, 100);
         gameMenu.add(leave_game);
 
         JLabel pauseLabel = new JLabel(new ImageIcon("miku_pic/pause.jpg"));
-        pauseLabel.setBounds(0, 0, 1920, 1080);
+        pauseLabel.setBounds(0, 0, getWidth(), getHeight());
         gameMenu.add(pauseLabel);
+
+
 
         start_game.addActionListener(new ActionListener(){
             @Override
@@ -67,6 +81,10 @@ class Main extends JFrame {
                 game.setVisible(true);
             }
         });
+
+
+
+
 
         close_game.addActionListener(new ActionListener(){
             @Override
@@ -102,11 +120,13 @@ class Main extends JFrame {
 
 
 
-
+        getContentPane().add(game);
         setVisible(true);
         game.setVisible(false);
         gameMenu.setVisible(false);
-    }
+        }
+
+
     public static void main (String[]args){
         new Main();
 
