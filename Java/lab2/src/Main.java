@@ -190,61 +190,63 @@ public class Main extends JFrame {
                 if (ls[j[0]].equals("new")) {
                     j[0] += 1;
                     i[0] += 1;}
+
+                JButton alive = new JButton("Сбежать");
+                alive.setBounds(getWidth() - 1160, getHeight() - 680, 400, 100);
+
+
+                JButton deadge = new JButton("Возмутиться");
+                deadge.setBounds(getWidth() - 1160, getHeight() - 560, 400, 100);
+
+
+                alive.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent a) {
+
+                        i[0] += 3;
+                        j[0] += 12;
+                        alive.setVisible(false);
+                        deadge.setVisible(false);
+                    }
+                });
+
+                deadge.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent a){
+
+                        game.remove(alive);
+                        game.remove(deadge);}
+                });
+
                 if (ls[j[0]].equals("choice")) {
-
-                    JButton alive = new JButton("Сбежать");
-                    alive.setBounds(getWidth() - 1160, getHeight() - 680, 400, 100);
-                    game.add(alive);
-
-                    JButton deadge = new JButton("Возмутиться");
-                    deadge.setBounds(getWidth() - 1160, getHeight() - 560, 400, 100);
                     game.add(deadge);
-
-                    alive.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent a) {
-
-                            endg[0] = "a";
-                            alive.setVisible(false);
-                            deadge.setVisible(false);
-                        }
-                    });
-
-                    deadge.addActionListener(new ActionListener(){
-                        @Override
-                        public void actionPerformed(ActionEvent a){
-                            endg[0] = "d";
-                            game.remove(alive);
-                            game.remove(deadge);}
-                    });
-
+                    game.add(alive);
                 }
 
 
                 if (endg[0].equals("a")) {
-                        while (!(ls[j[0]].equals("[[Сбежать!]]"))) j[0] += 1;
-                        picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + "_" + String.valueOf(en) + ".jpeg"));
-                        en+=1;
-                    }
+                    while (!(ls[j[0]].equals("[[Сбежать!]]"))) j[0] += 1;
+                    picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+                    en+=1;                }
                 if (endg[0].equals("d")) {
                     while(!(ls[j[0]].equals("[[Возмутиться!]]"))) j[0] += 1;
-                    picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + "_" + String.valueOf(en) + ".jpeg"));
-                    en+=1;
+                    picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0])+ ".jpeg"));
+
                 }
 
 
-                    else picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+                else picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
 
-                    pic.setIcon(new ImageIcon("miku_pic/blood.png"));
-                    label.setText(ls[j[0]]);
-                    pic.setBounds(550, 750, 697, 230);
-                    label.setBounds(550, 750, 697, 230);
-                    label.setFont(new Font("Arial", Font.BOLD, 14));
-                    label.setForeground(Color.WHITE);
+                pic.setIcon(new ImageIcon("miku_pic/blood.png"));
+                label.setText(ls[j[0]]);
+                pic.setBounds(550, 750, 697, 230);
+                label.setBounds(550, 750, 697, 230);
+                label.setFont(new Font("Arial", Font.BOLD, 14));
+                label.setForeground(Color.WHITE);
                     //game.add(label);
                     //game.add(pic);
-                    picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
-                    picture.setBounds(0, 0, getWidth(), getHeight());
+                //picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+                picture.setBounds(0, 0, getWidth(), getHeight());
                     //game.add(picture);
             }
 
