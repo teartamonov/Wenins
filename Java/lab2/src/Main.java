@@ -8,11 +8,20 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main extends JFrame {
     private JLabel textLabel;
+    private JLabel pic;
+    private JLabel label;
+    private JLabel picture;
     public Main() {
         super("Hatsune Miku: Yandere Love");
         setSize(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
@@ -41,7 +50,38 @@ public class Main extends JFrame {
         startLabel.setBounds(0, 0, getWidth(), getHeight());
         mainMenu.add(startLabel);
 
-        JButton game_menu = new JButton("Главное меню");
+
+        /*
+        JLabel pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
+        JLabel label = new JLabel(text.toString());
+        pic.setBounds(550, 750, 697, 230);
+        label.setBounds(550, 750, 697, 230);
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+        label.setForeground(Color.WHITE);
+        game.add(label);
+        game.add(pic);*/
+
+        /*String text = "";
+        try {
+            text = readFile("text/home_1.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+
+        //Label home_t1 = new JLabel(text);
+        //home_t1.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        JLabel home_l = new JLabel(new ImageIcon("miku_pic/home.jpeg"));
+        home_l.setBounds(0, 0, getWidth(), getHeight());
+        game.add(home_l);
+
+
+
+
+        JButton game_menu = new JButton("Меню");
         game_menu.setBounds(0, 44, 228, 63);
         game.add(game_menu);
 
@@ -50,15 +90,7 @@ public class Main extends JFrame {
         gameMenu.setLayout(null);
         add(gameMenu);
 
-        JLabel pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
-        JLabel label = new JLabel("Текст на картинке");
-        pic.setBounds(500, 500, 750, 275);
-        label.setBounds(500, 500, 750, 275);
-        label.setFont(new Font("Arial", Font.BOLD, 24));
-        label.setForeground(Color.WHITE);
 
-        gameMenu.add(label);
-        gameMenu.add(pic);
 
         JButton continue_game = new JButton("Продолжить игру");
         continue_game.setBounds(getWidth() - 1160, getHeight() - 680, 400, 100);
@@ -72,7 +104,168 @@ public class Main extends JFrame {
         pauseLabel.setBounds(0, 0, getWidth(), getHeight());
         gameMenu.add(pauseLabel);
 
+        String filePath = "text/home_1.txt";
+        String[] lines = null;
+        final int[] i = {1};
+        final int[] j = {1};
 
+
+        // = new JLabel(new ImageIcon("miku_pic/" + String.valueOf(i) + "jpeg"));
+        home_l.setBounds(0, 0, getWidth(), getHeight());
+        game.add(home_l);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder text = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                text.append(line).append("\n");
+            }
+            lines = text.toString().split("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        final String[] ls = lines;
+        pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
+        label = new JLabel("Я: - Мику, ты скоро? Мы так опоздаем в кино!");
+        pic.setBounds(550, 750, 697, 230);
+        label.setBounds(550, 750, 697, 230);
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+        label.setForeground(Color.WHITE);
+        game.add(label);
+        game.add(pic);
+        picture = new JLabel(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+        picture.setBounds(0, 0, getWidth(), getHeight());
+        game.add(picture);
+
+
+        /*if (line.equals("<html>")) continue;
+                    if (line.equals("<br>")) continue;
+                    if (line.equals("end") || line.equals("new")) {
+                        if ((line = reader.readLine()) == "new") line1 = line;
+                        text.append(reader.readLine());
+                        JLabel pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
+                        label = new JLabel(text.toString());
+                        pic.setBounds(550, 750, 697, 230);
+                        label.setBounds(550, 750, 697, 230);
+                        label.setFont(new Font("Arial", Font.BOLD, 14));
+                        label.setForeground(Color.WHITE);
+                        game.add(label);
+                        game.add(pic);
+                        if (line == line1) {
+                            i+=1;
+                            if (j != i) break;
+                            else{
+
+
+                                picture = new JLabel(new ImageIcon("miku_pic/" + String.valueOf(i) + ".jpeg"));
+                                picture.setBounds(0, 0, getWidth(), getHeight());
+                                game.add(picture);
+                                //brea
+                            }
+                        }
+                    }
+                    cycle:
+
+                    text.append(line).append("\n");
+
+                }}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+
+        pic.addMouseListener(new MouseListener() {
+
+
+            public void mouseClicked(MouseEvent e) {
+                final String[] endg = {""};
+                int en = 1;
+                j[0] += 1;
+                if (ls[j[0]].equals("song")) {
+
+                }
+
+                if (ls[j[0]].equals("<br>")) j[0] += 1;
+                if (ls[j[0]].equals("end")) j[0] += 1;
+                if (ls[j[0]].equals("new")) {
+                    j[0] += 1;
+                    i[0] += 1;}
+                if (ls[j[0]].equals("choice")) {
+
+                    JButton alive = new JButton("Сбежать");
+                    alive.setBounds(getWidth() - 1160, getHeight() - 680, 400, 100);
+                    game.add(alive);
+
+                    JButton deadge = new JButton("Возмутиться");
+                    deadge.setBounds(getWidth() - 1160, getHeight() - 560, 400, 100);
+                    game.add(deadge);
+
+                    alive.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent a) {
+
+                            endg[0] = "a";
+                            alive.setVisible(false);
+                            deadge.setVisible(false);
+                        }
+                    });
+
+                    deadge.addActionListener(new ActionListener(){
+                        @Override
+                        public void actionPerformed(ActionEvent a){
+                            endg[0] = "d";
+                            game.remove(alive);
+                            game.remove(deadge);}
+                    });
+
+                }
+
+
+                if (endg[0].equals("a")) {
+                        while (!(ls[j[0]].equals("[[Сбежать!]]"))) j[0] += 1;
+                        picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + "_" + String.valueOf(en) + ".jpeg"));
+                        en+=1;
+                    }
+                if (endg[0].equals("d")) {
+                    while(!(ls[j[0]].equals("[[Возмутиться!]]"))) j[0] += 1;
+                    picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + "_" + String.valueOf(en) + ".jpeg"));
+                    en+=1;
+                }
+
+
+                    else picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+
+                    pic.setIcon(new ImageIcon("miku_pic/blood.png"));
+                    label.setText(ls[j[0]]);
+                    pic.setBounds(550, 750, 697, 230);
+                    label.setBounds(550, 750, 697, 230);
+                    label.setFont(new Font("Arial", Font.BOLD, 14));
+                    label.setForeground(Color.WHITE);
+                    //game.add(label);
+                    //game.add(pic);
+                    picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+                    picture.setBounds(0, 0, getWidth(), getHeight());
+                    //game.add(picture);
+            }
+
+
+
+
+
+
+
+            public void mousePressed(MouseEvent e) {
+            }
+
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
+        });
 
         start_game.addActionListener(new ActionListener(){
             @Override
@@ -81,9 +274,6 @@ public class Main extends JFrame {
                 game.setVisible(true);
             }
         });
-
-
-
 
 
         close_game.addActionListener(new ActionListener(){
@@ -126,6 +316,10 @@ public class Main extends JFrame {
         gameMenu.setVisible(false);
         }
 
+    String readFile(String filePath) throws IOException {
+        byte[] bytes = Files.readAllBytes(Paths.get(filePath));
+        return new String(bytes);
+    }
 
     public static void main (String[]args){
         new Main();
