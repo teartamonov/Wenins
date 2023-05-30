@@ -154,7 +154,6 @@ public class Main extends JFrame {
                 }
 
                 if (ls[j[0]].equals("song1")) {
-                    System.out.println("PIZDA");
                     playBaddestMusic();
                 }
 
