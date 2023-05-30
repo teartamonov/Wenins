@@ -1,8 +1,7 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -19,8 +18,6 @@ import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main extends JFrame {
     private JLabel textLabel;
     private JLabel pic;
@@ -96,15 +93,36 @@ public class Main extends JFrame {
             e.printStackTrace();
         }
         final String[] ls = lines;
-        pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
-        label = new JLabel("Я: - Мику, ты скоро? Мы так опоздаем в кино!");
+        ArrayList<Pic> triangles = new ArrayList<Pic>(10);
+        triangles.add(createTriangle(1150, 900));
+        triangles.add(createTriangle(1180, 900));
+        triangles.add(createTriangle(1165, 875));
+
+        Thread rotateThread = new Thread(new Runnable() {
+            @Override
+            public void run(){
+                while(true){
+                    for(Pic pic : triangles){
+                        pic.angle += 4;
+                        pic.repaint();}
+                    try{
+                        Thread.sleep(13);
+                    }
+                    catch(Exception e){
+                        return;
+                    }}}});
+        rotateThread.start();
+
+
+        JLabel pic = new JLabel(new ImageIcon("miku_pic/blood.png"));
+        JLabel label = new JLabel("Я: - Мику, ты скоро? Мы так опоздаем в кино!");
         pic.setBounds(550, 750, 697, 230);
         label.setBounds(550, 750, 697, 230);
         label.setFont(new Font("Arial", Font.BOLD, 14));
         label.setForeground(Color.WHITE);
         game.add(label);
         game.add(pic);
-        picture = new JLabel(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
+        JLabel picture = new JLabel(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
         picture.setBounds(0, 0, getWidth(), getHeight());
         game.add(picture);
 
@@ -155,10 +173,14 @@ public class Main extends JFrame {
 
                 if (ls[j[0]].equals("song1")) {
                     playBaddestMusic();
+                    rotateThread.interrupt();
+                    hide_triangles(triangles);
                 }
 
                 if (ls[j[0]].equals("song2")) {
                     playBadMusic();
+                    rotateThread.interrupt();
+                    hide_triangles(triangles);
                 }
 
                 picture.setIcon(new ImageIcon("miku_pic/" + String.valueOf(i[0]) + ".jpeg"));
@@ -225,11 +247,29 @@ public class Main extends JFrame {
             }
         });
 
+
+
+
+
         getContentPane().add(game);
         setVisible(true);
         game.setVisible(false);
         gameMenu.setVisible(false);
         }
+    Pic createTriangle(int x, int y){
+        Random rng = new Random();
+        Pic pic = new Pic("miku_pic/blade.png");
+        pic.setBounds(x,y, 50, 50);
+        add(pic);
+        return pic;
+    }
+
+    void hide_triangles(ArrayList <Pic> triangles){
+        for(Pic pic : triangles){
+            pic.setVisible(false);
+            //pic.repaint();
+            }
+    }
 
     public void playBadMusic() {
         try {
