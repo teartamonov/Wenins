@@ -45,10 +45,8 @@ class Game implements Runnable {
     }
 
     public void run(){
-
         while(true){
             ArrayList<Circle> cc = new ArrayList<Circle>();
-            //circ.add(help);
             if (time % 500 == 0) circles.add(new Circle(help));
             for (Circle c : circles) {
                 if (c.xs - c.xb < -15) {
@@ -59,16 +57,16 @@ class Game implements Runnable {
                 c.big_size -= 10;
                 c.xb += 5;
                 c.yb += 5;
-                //c.big_circle.setBounds(xb, yb, big_size, big_size);
-                c.change();
-                c.big_circle.repaint();
+                c.big_circle.setSize(c.big_size, c.big_size);
+                c.big_circle.setLocation(c.xb, c.yb);
+
+                //c.change();
+                //help.repaint();
             }
             for (Circle c : cc) {
                 c.hide(help);
                 circles.remove(c);
             }
-
-
             try{
                 time += 25;
                 Thread.sleep(30);
@@ -76,48 +74,5 @@ class Game implements Runnable {
                 return;
             };
         }
-
     }
-
-    /*Runnable rotateRunnable = new Runnable() {
-        @Override
-        public void run(){
-            while(true){
-                for(Circle c : circles){
-                    c.big_size -= 10;
-                    c.xb += 5;
-                    c.yb += 5;
-
-                    //circleBig.setSize(big_size,big_size);
-                    //circleBig.setLocation(xb,yb);
-
-                    c.change();
-                    c.big_circle.repaint();
-
-
-                    if (c.xs - c.xb == -15){
-                        a_score -= 30;
-                        score_bar.repaint();
-                    }
-
-                    try{
-                        time += 30;
-                        Thread.sleep(30);
-                    } catch(Exception e){
-                        return;
-                    };
-                }}}};*/
-    //rotateThread.start();
-	    //rotateThread.start();
-        //timer.start();
-
-
-
-
-
-
-    void hide_circles(JFrame frame){
-
-    }
-
 }
