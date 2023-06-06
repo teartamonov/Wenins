@@ -48,7 +48,7 @@ public class Circle extends JComponent {
 
     }
     void change(){
-        big_circle.setBounds(xb,yb,big_size,big_size);
+        this.setBounds(xb,yb,big_size,big_size);
     }
 
 }
