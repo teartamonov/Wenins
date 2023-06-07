@@ -20,8 +20,8 @@ class Game implements Runnable {
     JFrame help;
     ArrayList<Circle> circles = new ArrayList<Circle>();
     Pic label = new Pic("pics/2.jpg");
-    Pic score_bar_back = new Pic("pics/score_bar_back.png"); //50x50
-    Pic score_bar = new Pic("pics/score_bar.png"); //30x30
+    Pic score_bar_back = new Pic("pics/score_bar_back.png"); 
+    Pic score_bar = new Pic("pics/score_bar.png"); 
     int time = 0;
     JLabel score_label;
     Random rng = new Random();
@@ -69,7 +69,11 @@ class Game implements Runnable {
         circles.add(new Circle(help));
 
         while(true){
-            System.out.println(a_score);
+			
+			if (a_score<=0) {					
+				System.exit(0);
+			}
+            //System.out.println(a_score);
             final boolean[] clickProcessed = {false};
 
             ArrayList<Circle> cc = new ArrayList<Circle>();
@@ -191,11 +195,7 @@ class Game implements Runnable {
             });
             score_label.setText(""+score);
 
-            //if (a_score<=0) break;
-
-
-            //Listener l = new Listener();
-            //c.small_circle.addMouseListener(l);
+     
             for (Circle c : circles) {
 
                 if ((c.xs - c.xb < -15)) {
