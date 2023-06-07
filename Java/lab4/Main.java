@@ -14,9 +14,24 @@ public class Main extends JFrame {
         setDefaultCloseOperation(3);
         setLayout(null);
         Game game = new Game(this);
-        new Thread(game).start();
+        Thread g = new Thread(game);
+
+        JLabel deadge = new JLabel("YOU'RE DEADGE");
+        deadge.setBounds(100,100,800,100);
+        deadge.setFont(new Font("Serif", Font.BOLD, 30));
+        add(deadge);
+        deadge.setVisible(false);
+        g.start();
+        if (game.a_score<=0) {
+            g.interrupt();
+            deadge.setVisible(true);
+            System.exit(0);
+        }
+        //game.playMusic(); раскомментить для показа
+
         game.playMusic();
         setVisible(true);
+
     }
     public static void main(String[] args) { Main main = new Main();}
 }
