@@ -15,18 +15,9 @@ public class Main extends JFrame {
         setLayout(null);
         Game game = new Game(this);
         Thread g = new Thread(game);
-
-        JLabel deadge = new JLabel("YOU'RE DEADGE");
-        deadge.setBounds(100,100,800,100);
-        deadge.setFont(new Font("Serif", Font.BOLD, 30));
-        add(deadge);
-        deadge.setVisible(false);
         g.start();
-        if (game.a_score<=0) {
-            g.interrupt();
-            deadge.setVisible(true);
-            System.exit(0);
-        }
+        System.out.println(game.a_score);
+        
         //game.playMusic(); раскомментить для показа
 
         game.playMusic();
