@@ -1,6 +1,7 @@
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -18,23 +19,30 @@ class Game implements Runnable {
     int diff = 100;
     JFrame help;
     ArrayList<Circle> circles = new ArrayList<Circle>();
+    Pic label = new Pic("pics/2.jpg");
     Pic score_bar_back = new Pic("pics/score_bar_back.png"); //50x50
     Pic score_bar = new Pic("pics/score_bar.png"); //30x30
     int time = 0;
+    JLabel score_label;
     Random rng = new Random();
 
     Game(JFrame frame){
         help = frame;
-
+        label.setBounds(0, 0, 1000, 600);
+        
+        frame.add(label);
         //xs = 150 + rng.nextInt(350);
         //ys = 150 + rng.nextInt(350);
-        score = 0; a_score = 10;
+        score = 0; a_score = 150;
 
         //xb = xs - diff;
         //yb = ys - diff;
 
         score_bar_back.setBounds(10,10,600, 50);
         score_bar.setBounds(33,10, a_score, 50);
+        score_label=new JLabel("0");
+        score_label.setBounds(650,10,40,40);
+        frame.add(score_label);
 
         //circleSmall.setBounds(xs,ys,small_size,small_size);
         //circleBig.setBounds(xb,yb,big_size,big_size);
@@ -57,8 +65,12 @@ class Game implements Runnable {
     }
 
     public void run(){
+
         circles.add(new Circle(help));
+
         while(true){
+            System.out.println(a_score);
+            final boolean[] clickProcessed = {false};
 
             ArrayList<Circle> cc = new ArrayList<Circle>();
             if (time % 500 == 0) circles.add(new Circle(help));
@@ -67,55 +79,119 @@ class Game implements Runnable {
                 //class Listener implements MouseListener {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+
+
                     //c this;
                     //this.
-                    if(round.xs - round.xb < 15 ){
-                        score += 300;
-                        a_score += 10;
-                    }
-                    else if(round.xs - round.xb < 25 ){
-                        score += 200;
-                        a_score += 5;
-                    } else if(round.xs - round.xb < 40){
-                        score += 100;
-                        a_score += 2;
-                    } else if(round.xs - round.xb < 60 ){
-                        score -= 100;
-                        a_score -= 2;
-                    }
-                    else {
-                        score -= 300;
-                        a_score -= 50;
-                    }
+                    if (!clickProcessed[0]) {
+                        clickProcessed[0] = true;
 
-                    round.big_circle.setVisible(false);
-                    round.small_circle.setVisible(false);
-                    if (a_score > 600) a_score = 600;
-                    score_bar.setBounds(10,10, a_score, 50);
-                    score_bar.repaint();
-                }
+                        //System.out.println("uwu");
+                        if ((round.xs - round.xb) < 15) {
+                            score += 300/20;
+                            a_score += 40/10;
+                        /*Numbers wow = new Numbers(help,score);
+                        wow.setBounds(round.xs,round.ys,100,20);
+                        wow.add(help);
+                        wow.setVisible(true);
+                        try{
+                            Thread.sleep(70);
+                        } catch(Exception a){
+                            return;
+                        };
+                        wow.setVisible(false);*/
+                        } else if (round.xs - round.xb < 25) {
+                            score += 13;
+                            a_score += 20/10;
+                            System.out.println("should 200");
+                        /*Numbers wow = new Numbers(help,score);
+                        wow.setBounds(round.xs,round.ys,100,20);
+                        wow.add(help);
+                        wow.setVisible(true);
+                        try{
+                            Thread.sleep(70);
+                        } catch(Exception a){
+                            return;
+                        };
+                        wow.setVisible(false);*/
+                        } else if (round.xs - round.xb < 40) {
+                            score += 7;
+                            a_score += 1;
+                            System.out.println("should 100");
+                        /*Numbers wow = new Numbers(help,score);
+                        wow.setBounds(round.xs,round.ys,100,20);
+                        wow.add(help);
+                        wow.setVisible(true);
+                        try{
+                            Thread.sleep(70);
+                        } catch(Exception a){
+                            return;
+                        };
+                        wow.setVisible(false);*/
+                        } else if (round.xs - round.xb < 60) {
+                            //score -= 100;
+                            a_score -= 2;
+                        /*Numbers wow = new Numbers(help,score);
+                        wow.setBounds(round.xs,round.ys,100,20);
+                        wow.add(help);
+                        wow.setVisible(true);
+                        try{
+                            Thread.sleep(130);
+                        } catch(Exception a){
+                            return;
+                        };
+                        wow.setVisible(false);*/
+                        } else {
+                            //score -= 300;
+                            a_score -= 50;
+                        /*Numbers wow = new Numbers(help,score);
+                        wow.setBounds(round.xs,round.ys,100,20);
+                        wow.add(help);
+                        wow.setVisible(true);
+                        try{
+                            Thread.sleep(130);
+                        } catch(Exception a){
+                            return;
+                        };
+                        wow.setVisible(false);*/
+
+                        }
+
+                        round.big_circle.setVisible(false);
+                        round.small_circle.setVisible(false);
+                        cc.add(round);
+
+                        if (a_score > 600) a_score = 600;
+                        score_bar.setBounds(10, 10, a_score, 50);
+                        score_bar.repaint();
+                        //System.out.println(a_score);
+                    }}
 
 
                 @Override
-                public void mousePressed(MouseEvent e) {
+                public void mousePressed (MouseEvent e){
 
                 }
 
                 @Override
-                public void mouseReleased(MouseEvent e) {
+                public void mouseReleased (MouseEvent e){
 
                 }
 
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered (MouseEvent e){
 
                 }
 
                 @Override
-                public void mouseExited(MouseEvent e) {
+                public void mouseExited (MouseEvent e){
 
                 }
+
             });
+            score_label.setText(""+score);
+
+            //if (a_score<=0) break;
 
 
             //Listener l = new Listener();
@@ -137,13 +213,15 @@ class Game implements Runnable {
             for (Circle c : cc) {
                 c.hide(help);
                 circles.remove(c);
+
             }
             try{
                 time += 25;
-                Thread.sleep(30);
+                Thread.sleep(25);
             } catch(Exception e){
                 return;
             };
         }
+
     }
 }
