@@ -10,192 +10,62 @@ import java.util.ArrayList;
 
 
 class Game implements Runnable {
-    private Clip backgroundMusic;
-    int xs,ys;
-    int xb,yb;
-    int score, a_score;
-    int small_size = 100;
-    int big_size = 300;
-    int diff = 100;
+    protected static int score = 0;
+    protected static int a_score = 600;
     JFrame help;
+    ArrayList<Circle> cc = new ArrayList<Circle>(0);
     ArrayList<Circle> circles = new ArrayList<Circle>();
     Pic label = new Pic("pics/2.jpg");
     Pic score_bar_back = new Pic("pics/score_bar_back.png"); 
-    Pic score_bar = new Pic("pics/score_bar.png"); 
+    Pic score_bar = new Pic("pics/score_bar.png");
     int time = 0;
     JLabel score_label;
     Random rng = new Random();
+    Cursor cursor;
 
     Game(JFrame frame){
+        cursor = new Cursor();
+        frame.add(cursor.curs);
         help = frame;
         label.setBounds(0, 0, 1000, 600);
         
-        frame.add(label);
-        //xs = 150 + rng.nextInt(350);
-        //ys = 150 + rng.nextInt(350);
-        score = 0; a_score = 150;
-
-        //xb = xs - diff;
-        //yb = ys - diff;
+        //frame.add(label);
 
         score_bar_back.setBounds(10,10,600, 50);
         score_bar.setBounds(33,10, a_score, 50);
-        score_label=new JLabel("0");
+        score_label = new JLabel("0");
         score_label.setBounds(650,10,40,40);
+
         frame.add(score_label);
-
-        //circleSmall.setBounds(xs,ys,small_size,small_size);
-        //circleBig.setBounds(xb,yb,big_size,big_size);
-
-        //frame.add(circleSmall);
-        //frame.add(circleBig);
         frame.add(score_bar_back);
         frame.add(score_bar);
 
+    }
 
-    }
-    public void playMusic() {
-        try {
-            backgroundMusic = AudioSystem.getClip();
-            backgroundMusic.open(AudioSystem.getAudioInputStream(new File("music/super_beat1.wav")));
-            backgroundMusic.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void run(){
 
-        circles.add(new Circle(help));
+        circles.add(new Circle(help, score, a_score, cc, score_bar));
 
         while(true){
-			
-			if (a_score<=0) {					
+
+			if (a_score<=0) {
 				System.exit(0);
 			}
+
+            score_bar.setBounds(10, 10, a_score, 50);
+            score_bar.repaint();
             //System.out.println(a_score);
             final boolean[] clickProcessed = {false};
 
             ArrayList<Circle> cc = new ArrayList<Circle>();
-            if (time % 500 == 0) circles.add(new Circle(help));
+            if (time % 500 == 0) circles.add(new Circle(help, score, a_score, cc, score_bar));
             Circle round = circles.get(circles.size() - 1);
-            round.small_circle.addMouseListener(new MouseListener() {
-                //class Listener implements MouseListener {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-
-
-                    //c this;
-                    //this.
-                    if (!clickProcessed[0]) {
-                        clickProcessed[0] = true;
-
-                        //System.out.println("uwu");
-                        if ((round.xs - round.xb) < 15) {
-                            score += 300/20;
-                            a_score += 40/10;
-                        /*Numbers wow = new Numbers(help,score);
-                        wow.setBounds(round.xs,round.ys,100,20);
-                        wow.add(help);
-                        wow.setVisible(true);
-                        try{
-                            Thread.sleep(70);
-                        } catch(Exception a){
-                            return;
-                        };
-                        wow.setVisible(false);*/
-                        } else if (round.xs - round.xb < 25) {
-                            score += 13;
-                            a_score += 20/10;
-                            System.out.println("should 200");
-                        /*Numbers wow = new Numbers(help,score);
-                        wow.setBounds(round.xs,round.ys,100,20);
-                        wow.add(help);
-                        wow.setVisible(true);
-                        try{
-                            Thread.sleep(70);
-                        } catch(Exception a){
-                            return;
-                        };
-                        wow.setVisible(false);*/
-                        } else if (round.xs - round.xb < 40) {
-                            score += 7;
-                            a_score += 1;
-                            System.out.println("should 100");
-                        /*Numbers wow = new Numbers(help,score);
-                        wow.setBounds(round.xs,round.ys,100,20);
-                        wow.add(help);
-                        wow.setVisible(true);
-                        try{
-                            Thread.sleep(70);
-                        } catch(Exception a){
-                            return;
-                        };
-                        wow.setVisible(false);*/
-                        } else if (round.xs - round.xb < 60) {
-                            //score -= 100;
-                            a_score -= 2;
-                        /*Numbers wow = new Numbers(help,score);
-                        wow.setBounds(round.xs,round.ys,100,20);
-                        wow.add(help);
-                        wow.setVisible(true);
-                        try{
-                            Thread.sleep(130);
-                        } catch(Exception a){
-                            return;
-                        };
-                        wow.setVisible(false);*/
-                        } else {
-                            //score -= 300;
-                            a_score -= 50;
-                        /*Numbers wow = new Numbers(help,score);
-                        wow.setBounds(round.xs,round.ys,100,20);
-                        wow.add(help);
-                        wow.setVisible(true);
-                        try{
-                            Thread.sleep(130);
-                        } catch(Exception a){
-                            return;
-                        };
-                        wow.setVisible(false);*/
-
-                        }
-
-                        round.big_circle.setVisible(false);
-                        round.small_circle.setVisible(false);
-                        cc.add(round);
-
-                        if (a_score > 600) a_score = 600;
-                        score_bar.setBounds(10, 10, a_score, 50);
-                        score_bar.repaint();
-                        //System.out.println(a_score);
-                    }}
-
-
-                @Override
-                public void mousePressed (MouseEvent e){
-
-                }
-
-                @Override
-                public void mouseReleased (MouseEvent e){
-
-                }
-
-                @Override
-                public void mouseEntered (MouseEvent e){
-
-                }
-
-                @Override
-                public void mouseExited (MouseEvent e){
-
-                }
-
-            });
             score_label.setText(""+score);
 
-     
+            cursor.move(circles.get(0).xs+50, circles.get(0).ys+50);
+            //circles.get(0);
+
             for (Circle c : circles) {
 
                 if ((c.xs - c.xb < -15)) {
@@ -213,7 +83,6 @@ class Game implements Runnable {
             for (Circle c : cc) {
                 c.hide(help);
                 circles.remove(c);
-
             }
             try{
                 time += 25;
@@ -222,6 +91,12 @@ class Game implements Runnable {
                 return;
             };
         }
-
+    }
+    static void setScore(int value){
+        score = value;
+    }
+    static void setA_score(int value){
+        a_score = value;
     }
 }
+
