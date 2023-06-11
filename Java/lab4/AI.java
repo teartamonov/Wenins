@@ -2,7 +2,6 @@ import java.util.Random;
 
 class AI {
     float [] k = new float[18];
-    /// x, y - cursor; x - y -closest; time - left;
 
     int[] shouldClick(int x_cursor, int y_cursor, int x_small, int y_small, int time_left){
         int[] list = new int[3];
@@ -16,7 +15,6 @@ class AI {
         /*if (tmp >= 0 && tmp <= 600)*/ list[2] = Math.round(tmp);
 
         return list;
-        //return k[0]*x_big+k[1]*y_big+k[2]*x_small+k[3]*y_small+k[4]*speed+k[5]<0;
     }
 
     AI(float[]k){
