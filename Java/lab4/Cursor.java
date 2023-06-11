@@ -12,9 +12,5 @@ public class Cursor {
         else ty = Math.max(-20, y - curs.getY());
 
         curs.setLocation(curs.getX() + tx,curs.getY() + ty);
-
-        //timer+=10;
-        //max speed 20;
-        //min speed 1;
     }
 }
