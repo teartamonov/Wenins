@@ -18,6 +18,7 @@ class Simulator{
         this.ai = ai;
 
     }
+     
     boolean isCircle(int x, int y){
         for(Circle c: circles){
             if((x < c.xs + c.small_size) && (x > c.xs)){
@@ -35,17 +36,21 @@ class Simulator{
         int total_time = 0;
         int time_left;
         while(score<100000) {
-            //every 25 ms: -20pixels
-
             if (a_score <= 0) {
                 return total_time;
             }
+            //for deleting
             ArrayList<Circle> cc = new ArrayList<Circle>();
+            //circle disappearing first
             Circle round = circles.get(0);
             time_left = (round.xs - round.xb) * 5;
+            //adding new every 0.5s
             if (time % 500 == 0) circles.add(new Circle(help, score, a_score, cc, score_bar));
+            //deciding click or not
             int[] tmp = ai.shouldClick(cursor.curs.getX()+10, cursor.curs.getY()+10, round.xs+50, round.ys+50, time_left);
+            
             cursor.move(tmp[1],tmp[2]);
+            //+10 for center of circle instead of edge of square
             if ((tmp[0] == 1) && (isCircle(cursor.curs.getX()+10,cursor.curs.getY()+10))){
                 if (((round.xs - round.xb) < 15)) {
                     score += 300;
@@ -61,11 +66,11 @@ class Simulator{
                 } else {
                     a_score -= 50;
                 }
+                //deleting
                 cc.add(round);
             }
-
+            //auto deleting
             for (Circle c : circles) {
-
                 if ((c.xs - c.xb < -15)) {
                     cc.add(c);
                     a_score -= 50;
