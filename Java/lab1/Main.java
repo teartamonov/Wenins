@@ -69,7 +69,7 @@ class Unit {
             default: System.out.println("Unknown key."); return;
         }
         if(!field.canGo(nx,ny)) {
-            System.out.println("IDI NAHUI!");
+            System.out.println("cant");
             nx = x;
             ny = y;
             return;
