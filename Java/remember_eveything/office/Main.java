@@ -1,5 +1,7 @@
-import workers.Accountant;
-import workers.Programmer;
+package office;
+
+import office.workers.Accountant;
+import office.workers.Programmer;
 
 public class Main {
     public static void main(String[] args) {

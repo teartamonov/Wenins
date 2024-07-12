@@ -1,4 +1,4 @@
-package workers;
+package office.workers;
 
 public class Programmer extends Worker {
 

@@ -1,4 +1,4 @@
-package workers;
+package office.workers;
 
 abstract public class Worker{
     String name;
