@@ -8,7 +8,7 @@ public class Main {
     m1.subtract(m2).get_money();
     m1.multiply(m2).get_money();
     m1.divide(m2).get_money();
-
+    //Sad, but with conditions of task it's really hard to do these computations correctly, the zeros in start of float part will always die
 
     }
 }
