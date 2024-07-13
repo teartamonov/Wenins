@@ -1,0 +1,20 @@
+Skip navigation links
+    Overview
+    Package
+    Class
+    Use
+    Tree
+    Deprecated
+    Index
+    Help
+Java Platform
+Standard Ed. 8
+    Prev Package
+    Next Package
+    Frames
+    No Frames
+    All Classes
+Package java.util
+Contains the collections framework, legacy collection classes, event model, date and time facilities, internationalization, and miscellaneous utility classes (a string tokenizer, a random-number generator, and a bit array).
+
+This is Java documentation of some class
