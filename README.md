@@ -1,8 +1,7 @@
 - 👋 Hi, I’m @Wenins
-- 👀 I’m interested in Machine Learning and Data Аnalysis
+- 👀 I’m interested in Machine Learning, Deep Learning, NLP tasks and Back-End
 - 🌱 I’m currently learning Python, C++, Java
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+- 📫 How to reach me t.me/Wenins
 
 <!---
 Wenins/Wenins is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
